@@ -1,0 +1,44 @@
+1.连接上有线网络并切换到root用户。
+
+2.备份一下Debian9的软件源配置文件：
+
+cd /etc/apt/
+cp sources.list sources.list.bak
+
+2.打开Debian9的软件源配置文件：
+
+leafpad /etc/apt/sources.list
+
+注：用leafpad打开方面复制，Debian9默认没有安装leafpad.
+3.将non-free添加到每个源的后面： 
+修改好之后是这样的：
+
+# 
+
+# deb cdrom:[Debian GNU/Linux 9.4.0 _Stretch_ - Official amd64 DVD Binary-1 20180310-11:21]/ stretch contrib main
+
+#deb cdrom:[Debian GNU/Linux 9.4.0 _Stretch_ - Official amd64 DVD Binary-1 20180310-11:21]/ stretch contrib main
+
+deb http://mirrors.tuna.tsinghua.edu.cn/debian/ stretch main non-free
+deb-src http://mirrors.tuna.tsinghua.edu.cn/debian/ stretch main non-free
+
+deb <http://security.debian.org/debian-security stretch/updates> main contrib non-free
+deb-src <http://security.debian.org/debian-security stretch/updates> main contrib non-free
+
+# stretch-updates, previously known as 'volatile'
+deb http://mirrors.tuna.tsinghua.edu.cn/debian/ stretch-updates main contrib non-free
+deb-src http://mirrors.tuna.tsinghua.edu.cn/debian/ stretch-updates main contrib no
+更新系统：
+
+apt-get update
+1
+安装firmware-iwlwifi包：
+
+apt-get install firmware-iwlwifi
+1
+iwlwifi模块可以被自动加载，当iwlwifi被自动加载时我们需要重新插入该模块以访问固件。 
+设置iwlwifi自动重新加载：
+
+modprobe -r iwlwifi ; modprobe iwlwifi
+1
+之后我们就可以看到wifi连接的选项了
